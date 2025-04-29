@@ -1,0 +1,48 @@
+\documentclass{article}
+
+
+\title{Labwork 1: Gradient Descent}
+
+\begin{document}
+
+\maketitle
+
+\setlength\parindent{0pt}
+
+\section{Introduction}
+
+Gradient descent: definition
+
+Gradient descent is an optimization algorithm used to minimize a function by iteratively moving in the direction of the steepest descent, as defined by the negative of the gradient.
+
+\section{Implementation}
+
+The implementation of gradient descent in this lab minimizes the function $f(x)$. 
+The algorithm starts with an initial value of $x$, a learning rate $r$, and a convergence threshold $\epsilon$. 
+It iteratively updates $x$ using the formula $x = x - r \cdot f'(x)$, where $f'(x)$ is the gradient of $f(x)$. 
+The process continues until $f(x)$ becomes less than or equal to $\epsilon$, at which point the algorithm returns the final values of $x$ and $f(x)$.
+
+\section{Evaluation}
+
+Test with $y = x^4$
+
+Output of my program:\\
+\\
+Enter initial x: 2\\
+Enter learning rate r: 0.05\\
+Enter convergence threshold epsilon: 5\\
+Final x: 0.3999999999999999, Final f(x): 0.025599999999999977\\
+\\
+How ever, for the learning rate of 0.1, the program gives:\\
+OverflowError: (34, 'Numerical result out of range')\\
+\\
+The reason for this is that the learning rate is too high, causing the algorithm to overshoot the minimum and produce an overflow error.
+
+\section{Conclusion}
+
+In this labwork, I implemented the gradient descent algorithm to minimize the function $f(x) = x^4$.
+The result is that the algorithm converged to a minimum value of $f(x)$ at $x \approx 0.4$ with a final function value of approximately $0.0256$.\\
+\\
+An interesting finding is that the choice of learning rate significantly affects the convergence speed and stability of the algorithm. A smaller learning rate leads to slower convergence, while a larger one may cause divergence.
+
+\end{document}
