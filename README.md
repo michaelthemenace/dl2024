@@ -12,5 +12,5 @@ Students are expected to:
 Student Info
 =======================
 
-* Name: MyName
-
+* Name: Bui Tuan Minh
+* ID: 240041
