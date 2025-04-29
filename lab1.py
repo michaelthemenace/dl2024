@@ -6,15 +6,17 @@ def gradientDescent(f, f_prime, x, r, epsilon):
         print(f"Current x: {x}, f(x): {fx}")
     return [x, fx]
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
+
     def f(x):
-        return x ** 4
+        return x**4
 
     def f_prime(x):
-        return 4 * x ** 3
+        return 4 * x**3
 
-    x = float(input('Enter initial x: '))
-    r = float(input('Enter learning rate r: '))
-    epsilon = float(input('Enter convergence threshold epsilon: '))
+    x = float(input("Enter initial x: "))
+    r = float(input("Enter learning rate r: "))
+    epsilon = float(input("Enter convergence threshold epsilon: "))
     result = gradientDescent(f, f_prime, x, r, epsilon)
     print(f"Final x: {result[0]}, Final f(x): {result[1]}")
