@@ -3,6 +3,7 @@ def gradientDescent(f, f_prime, x, r, epsilon):
     while fx > epsilon:
         x = x - r * f_prime(x)
         fx = f(x)
+        print(f"Current x: {x}, f(x): {fx}")
     return [x, fx]
 
 if __name__ == '__main__':
