@@ -1,4 +1,4 @@
-def gradientDescent(f, f_prime, x, r, epsilon):
+def gradient_descent(f, f_prime, x, r, epsilon):
     fx = f(x)
     while fx > epsilon:
         x = x - r * f_prime(x)
@@ -18,5 +18,5 @@ if __name__ == "__main__":
     x = float(input("Enter initial x: "))
     r = float(input("Enter learning rate r: "))
     epsilon = float(input("Enter convergence threshold epsilon: "))
-    result = gradientDescent(f, f_prime, x, r, epsilon)
+    result = gradient_descent(f, f_prime, x, r, epsilon)
     print(f"Final x: {result[0]}, Final f(x): {result[1]}")
