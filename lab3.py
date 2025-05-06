@@ -1,27 +1,30 @@
 import math
 
 
+def sigmoid(x):
+    return 1 / (1 + math.exp(-x))
+
+
 def predict(x1i, x2i, w1, w2, w0):
     return w1 * x1i + w2 * x2i + w0
 
 
-def cal_single_loss(yi, yi_pred):
-    return -(
-        yi * math.log(1 + math.exp(-yi_pred))
-        + (1 - yi) * (-yi_pred - math.log(1 + math.exp(-yi_pred)))
-    )
+def cal_single_loss(yi, yi_pred, epsilon=1e-15):
+    sig = sigmoid(yi_pred)
+    sig = min(max(sig, epsilon), 1 - epsilon)
+    return -(yi * math.log(sig) + (1 - yi) * math.log(1 - sig))
 
 
 def cal_new_w0(w0, r, yi, yi_pred):
-    return w0 - r * (1 - yi - 1 / -(1 + math.exp(-yi_pred)))
+    return w0 - r * (1 - yi - sigmoid(-yi_pred))
 
 
 def cal_new_w1(w1, r, x1i, yi, yi_pred):
-    return w1 - r * (-yi * x1i - x1i * (1 - 1 / -(1 + math.exp(-yi_pred))))
+    return w1 - r * (-yi * x1i - x1i * (1 - sigmoid(-yi_pred)))
 
 
 def cal_new_w2(w2, r, x2i, yi, yi_pred):
-    return w2 - r * (-yi * x2i - x2i * (1 - 1 / -(1 + math.exp(-yi_pred))))
+    return w2 - r * (-yi * x2i - x2i * (1 - sigmoid(-yi_pred)))
 
 
 def logistic_regression(file_path, r=0.5, w0=0, w1=0, w2=0):
@@ -40,7 +43,7 @@ def logistic_regression(file_path, r=0.5, w0=0, w1=0, w2=0):
         w2 = cal_new_w2(w2, r, x2i, yi, yi_pred)
         Li = cal_single_loss(yi, yi_pred)
         print(f"{i}th iteration:")
-        print(f"w0: {w0}, w1: {w1}, w2: {w2}, yi_pred: {yi_pred} loss: {Li}")
+        print(f"w0: {w0}, w1: {w1}, w2: {w2}, yi_pred: {sigmoid(yi_pred)} loss: {Li}")
         total_loss += Li
 
     final_loss = total_loss / n
